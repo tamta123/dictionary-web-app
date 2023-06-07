@@ -1,32 +1,73 @@
-const Header = ({ selectedFont, handleFontChange }) => {
+const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
   return (
-    <div className="flex justify-between items-center">
-      <img className="mr-[133px]" src="./images/logo.svg" alt="logo" />
-      <select
-        className="outline-none"
-        value={selectedFont}
-        onChange={handleFontChange}
-      >
-        <option value="Inter">Sans Serif</option>
-        <option value="Lora">Serif</option>
-        <option value="monospace">Mono</option>
-      </select>
-      <div className=" h-8 w-[1px] bg-gray-500"></div>
-      {/* <label for="darkMode" className="h-5 w-10 rounded-[10px] bg-purple-600">
-        <input
-          className="rounded-[50%]"
-          type="checkbox"
-          name="darkMode"
-          id="darkMode"
+    <div className="flex justify-between m-auto items-center">
+      <img className="" src="./images/logo.svg" alt="logo" />
+      <div className="w-2/3 md:w-1/3 flex justify-between items-center gap-3">
+        <div className="flex">
+          <select
+            className={`outline-none appearance-none cursor-pointer ${
+              mode === "dark" ? " bg-dark-mode" : "bg-[#FFFFFF]"
+            } ${mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"}`}
+            value={selectedFont}
+            onChange={handleFontChange}
+          >
+            <option
+              className={`text-center cursor-pointer ${
+                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
+              }`}
+              value="Inter"
+            >
+              Sans Serif
+            </option>
+            <option
+              className={` text-center cursor-pointer ${
+                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
+              }`}
+              value="Lora"
+            >
+              Serif
+            </option>
+            <option
+              className={` text-center cursor-pointer ${
+                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
+              }`}
+              value="monospace"
+            >
+              Mono
+            </option>
+          </select>
+          <img
+            className="mr-[5px]"
+            src="./images/icon-arrow-down.svg"
+            alt="arrow down"
+          />
+        </div>
+        <label
+          htmlFor="darkMode"
+          className={`h-5 w-10 rounded-[10px] relative cursor-pointer ${
+            mode === "dark" ? "bg-purple-600" : "bg-[#757575]"
+          }`}
+        >
+          <input
+            className="sr-only peer"
+            type="checkbox"
+            id="darkMode"
+            onClick={toggleMode}
+          />
+          <span className="w-2/5 h-4/5 bg-white absolute rounded-[10px] left-[2px] top-[2px] peer-checked:left-[22px] transition-all duration-500"></span>
+        </label>
+
+        <img
+          className={`${mode === "dark" ? "hidden" : "block"}`}
+          src="./images/icon-moon.svg"
+          alt="moon"
         />
-        <span></span>
-      </label> */}
-      <img
-        // className={`${mode === "dark" ? "dark-mode" : ""}`}
-        // onClick={toggleMode}
-        src="./images/icon-moon.svg"
-        alt="moon"
-      />
+        <img
+          className={`${mode === "dark" ? "block" : "hidden"}`}
+          src="./images/moon-icon-dark.svg"
+          alt="moon"
+        />
+      </div>
     </div>
   );
 };

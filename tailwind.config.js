@@ -3,18 +3,14 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        Inter: "'Inter',sans-serif",
-        Lora: "'Lora',serif",
-        monospace: "'Inconsolata',monospace",
-      },
       colors: {
-        dark: "#050505",
         "div-grey": "#E9E9E9",
-      },
-      backgroundColor: {
         "gray-200": "#F4F4F4",
-        dark: "#050505",
+        "dark-mode": "#050505",
+        "dark-search-bar": "#1F1F1F",
+        "dark-mode-font": "#FFFFFF",
+        "dark-mode-example": "#757575",
+        "dark-mode-line": "#3A3A3A",
       },
     },
   },
