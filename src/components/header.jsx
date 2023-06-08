@@ -1,47 +1,63 @@
+import React from "react";
+import Select from "react-select";
+
 const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
   return (
-    <div className="flex justify-between m-auto items-center">
+    <div className="flex justify-between m-auto items-center xl:pb-[52px]">
       <img className="" src="./images/logo.svg" alt="logo" />
       <div className="w-2/3 md:w-1/3 flex justify-between items-center gap-3">
-        <div className="flex">
-          <select
-            className={`outline-none appearance-none cursor-pointer ${
-              mode === "dark" ? " bg-dark-mode" : "bg-[#FFFFFF]"
-            } ${mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"}`}
-            value={selectedFont}
-            onChange={handleFontChange}
-          >
-            <option
-              className={`text-center cursor-pointer ${
-                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
-              }`}
-              value="Inter"
-            >
-              Sans Serif
-            </option>
-            <option
-              className={` text-center cursor-pointer ${
-                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
-              }`}
-              value="Lora"
-            >
-              Serif
-            </option>
-            <option
-              className={` text-center cursor-pointer ${
-                mode === "dark" ? "text-[#FFFFFF]" : " text-gray-900"
-              }`}
-              value="monospace"
-            >
-              Mono
-            </option>
-          </select>
-          <img
-            className="mr-[5px]"
-            src="./images/icon-arrow-down.svg"
-            alt="arrow down"
-          />
-        </div>
+        <Select
+          value={selectedFont}
+          options={[
+            { value: "Sans-serif", label: "Sans Serif" },
+            { value: "Serif", label: "Serif" },
+            { value: "Mono", label: "Mono" },
+          ]}
+          placeholder={selectedFont}
+          onChange={handleFontChange}
+          styles={{
+            dropdownIndicator: (provided, state) => ({
+              ...provided,
+              color: mode === "dark" ? "#A445ED" : "#A445ED",
+            }),
+            valueContainer: (provided, state) => ({
+              ...provided,
+              backgroundColor: mode === "dark" ? "#050505" : "",
+              border: "none",
+            }),
+            option: (provided, state) => ({
+              ...provided,
+              cursor: "pointer",
+              backgroundColor: mode === "dark" ? "#1F1F1F" : "",
+            }),
+            indicatorsContainer: (provided, state) => ({
+              ...provided,
+              backgroundColor: mode === "dark" ? "#050505" : "",
+            }),
+            indicatorSeparator: (provided, state) => ({
+              ...provided,
+              display: "none",
+            }),
+            group: (provided, state) => ({
+              ...provided,
+              color: mode === "dark" ? "#A445ED" : "#A445ED",
+            }),
+            menu: (provided, state) => ({
+              ...provided,
+              width: "160px",
+              borderRadius: "16px",
+              backgroundColor: mode === "dark" ? "#1F1F1F" : "#FFFFFF",
+              boxShadow: mode === "dark" ? "0px 5px 30px #A445ED" : "",
+              marginTop: "15px",
+            }),
+            menuList: (provided, state) => ({
+              ...provided,
+              color: mode === "dark" ? "#ffffff" : "",
+              fontWeight: "normal",
+            }),
+          }}
+        />
+
         <label
           htmlFor="darkMode"
           className={`h-5 w-10 rounded-[10px] relative cursor-pointer ${
@@ -56,7 +72,6 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
           />
           <span className="w-2/5 h-4/5 bg-white absolute rounded-[10px] left-[2px] top-[2px] peer-checked:left-[22px] transition-all duration-500"></span>
         </label>
-
         <img
           className={`${mode === "dark" ? "hidden" : "block"}`}
           src="./images/icon-moon.svg"

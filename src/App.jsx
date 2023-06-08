@@ -9,14 +9,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [isEmptyError, setIsEmptyError] = useState(false);
-  const [selectedFont, setSelectedFont] = useState("Inter");
+  const [selectedFont, setSelectedFont] = useState("Sans-serif");
   const [mode, setMode] = useState("light");
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
   const handleFontChange = (e) => {
-    setSelectedFont(e.target.value);
+    setSelectedFont(e.value);
   };
 
   const callWord = (src) => {
@@ -26,29 +26,29 @@ function App() {
     });
     sound.play();
   };
-
   const getDefinition = async () => {
     if (searchTerm === "") {
-      setIsEmptyError(true); // Set isEmptyError to true if searchTerm is empty
+      setIsEmptyError(true);
       setData(null);
       setSearchPerformed(false);
-      return;
-    }
-    try {
-      const response = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`
-      );
-      console.log(data);
-      setData(response.data);
-      setIsEmptyError(false); // Reset isEmptyError to false
-      setSearchPerformed(true);
-    } catch (error) {
-      console.error(error);
-      setData(null);
-      setIsEmptyError(false); // Reset isEmptyError to false
-      setSearchPerformed(true);
+    } else {
+      try {
+        const response = await axios.get(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`
+        );
+        console.log(data);
+        setData(response.data);
+        setIsEmptyError(false); // Reset isEmptyError to false
+        setSearchPerformed(true);
+      } catch (error) {
+        console.error(error);
+        setData(null);
+        setIsEmptyError(false); // Reset isEmptyError to false
+        setSearchPerformed(true);
+      }
     }
   };
+  console.log(searchTerm);
 
   return (
     <div
@@ -58,7 +58,7 @@ function App() {
     >
       <div
         className={
-          " px-6 py-6 h-auto md:px-10 md:pt-[58px] " +
+          " px-6 py-6 h-auto md:px-10 md:pt-[58px] xl:px-[353px] " +
           selectedFont +
           (mode === "dark" ? " bg-dark-mode" : "")
         }
@@ -70,7 +70,7 @@ function App() {
           handleFontChange={handleFontChange}
         />
         <div
-          className={`mt-6 flex justify-center rounded-2xl cursor-pointer relative ${
+          className={`mt-6 xl:mt-0 flex justify-center rounded-2xl cursor-pointer relative ${
             mode === "dark" ? " bg-dark-search-bar" : " bg-gray-200"
           }`}
         >
@@ -91,11 +91,11 @@ function App() {
             alt="Search Icon"
           />
         </div>
-        {isEmptyError && (
-          <div className="font-normal text-left mt-2 text-base leading-6 text-red-500">
+        {isEmptyError ? (
+          <div className="mt-[60px] font-normal text-left mt- text-base leading-6 text-red-500">
             Whoops, can't be empty...
           </div>
-        )}
+        ) : null}
         <div className="mt-[80px] flex justify-between items-center gap-y-2">
           <div>
             <div
@@ -115,12 +115,19 @@ function App() {
                 {data[0].phonetics.map((phonetic, index) => (
                   <div key={index}>
                     {phonetic.audio && (
-                      <img
-                        className="m-1"
-                        src="./images/icon-play.svg"
-                        alt="Play Icon"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="75"
+                        height="75"
+                        viewBox="0 0 75 75"
                         onClick={() => callWord(phonetic.audio)}
-                      />
+                        className="hover:audio-hover"
+                      >
+                        <g fill="#A445ED" fill-rule="evenodd">
+                          <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" />
+                          <path d="M29 27v21l21-10.5z" />
+                        </g>
+                      </svg>
                     )}
                   </div>
                 ))}

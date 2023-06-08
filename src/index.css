@@ -5,14 +5,20 @@
 @tailwind utilities;
 
 @layer utilities {
-  .Lora {
+  .Serif {
     font-family: "Lora", serif;
   }
-  .Inter {
+  .Sans-serif {
     font-family: "Inter", sans-serif;
   }
-  .monospace {
+  .Mono {
     font-family: "Inconsolata", monospace;
+  }
+  .audio-hover g circle {
+    opacity: 1;
+  }
+  .audio-hover g path {
+    fill: #ffffff;
   }
 }
 
