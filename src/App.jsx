@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Header from "./components/header";
 import { Howl } from "howler";
+import Select from "react-select"; // Import the Select component
 
 function App() {
   const [data, setData] = useState(null);
@@ -17,9 +18,6 @@ function App() {
   const handleFontChange = (e) => {
     setSelectedFont(e.target.value);
   };
-
-  // const soundSrc =
-  //   "https://api.dictionaryapi.dev/media/pronunciations/en/keyboard-us.mp3";
 
   const callWord = (src) => {
     const sound = new Howl({
@@ -60,7 +58,7 @@ function App() {
     >
       <div
         className={
-          "px-6 py-6 h-auto md:px-10 md:pt-[58px]" +
+          " px-6 py-6 h-auto md:px-10 md:pt-[58px] " +
           selectedFont +
           (mode === "dark" ? " bg-dark-mode" : "")
         }
@@ -72,7 +70,7 @@ function App() {
           handleFontChange={handleFontChange}
         />
         <div
-          className={`mt-6 flex justify-center rounded-2xl cursor-pointer ${
+          className={`mt-6 flex justify-center rounded-2xl cursor-pointer relative ${
             mode === "dark" ? " bg-dark-search-bar" : " bg-gray-200"
           }`}
         >
@@ -82,11 +80,12 @@ function App() {
             type="text"
             id="english-word"
             placeholder="Search for any word…"
-            className={` w-4/5 rounded-2xl text-base font-bold fill-none block p-2.5 outline-none cursor-pointer ${
+            className={` w-full rounded-2xl text-base font-bold fill-none block p-3 outline-purple-600 cursor-pointer absolute ${
               mode === "dark" ? " bg-[#1F1F1F]" : "bg-[#F4F4F4]"
             } ${mode === "dark" ? "text-dark-mode-font" : " text-gray-900"}`}
           />
           <img
+            className="absolute right-[15px] top-[15px]"
             src="./images/icon-search.svg"
             onClick={getDefinition}
             alt="Search Icon"
@@ -97,7 +96,7 @@ function App() {
             Whoops, can't be empty...
           </div>
         )}
-        <div className="flex justify-between items-center gap-y-2 mt-7">
+        <div className="mt-[80px] flex justify-between items-center gap-y-2">
           <div>
             <div
               className={`font-bold text-2xl leading-8 mb-2 md:text-6xl ${
@@ -117,6 +116,7 @@ function App() {
                   <div key={index}>
                     {phonetic.audio && (
                       <img
+                        className="m-1"
                         src="./images/icon-play.svg"
                         alt="Play Icon"
                         onClick={() => callWord(phonetic.audio)}
@@ -153,7 +153,7 @@ function App() {
                       <div key={meaningIndex}>
                         <div className="mt-8 mb-9 flex justify-start gap-x-[25px] items-center">
                           <div
-                            className={`font-bold text-[16px] leading-tight ${
+                            className={`font-bold text-[16px] leading-tight md:text-[24px] ${
                               mode === "dark"
                                 ? "text-dark-mode-font"
                                 : " text-gray-600"
@@ -175,15 +175,19 @@ function App() {
                             } `}
                           ></div>
                         </div>
-                        <h3 className="mb-4 font-normal text-base leading-4 text-dark-mode-example">
+                        <h3 className="mb-4 font-normal text-base leading-4 text-dark-mode-example md:text-[20px]">
                           Meaning
                         </h3>
-                        <ul className="flex flex-col gap-y-3 mb-6 ml-4 list-disc">
+                        <ul
+                          className={`flex flex-col gap-y-3 mb-6 ml-4 list-disc ${
+                            mode === "dark" ? " marker:text-purple-600" : ""
+                          }`}
+                        >
                           {meaning.definitions.map(
                             (definition, definitionIndex) => (
                               <li
                                 key={definitionIndex}
-                                className={`font-normal text-base leading-6 ${
+                                className={`font-normal text-base leading-6 md:text-[18px] ${
                                   mode === "dark"
                                     ? "text-[#FFFFFF]"
                                     : " text-gray-900"
@@ -201,10 +205,10 @@ function App() {
                         </ul>
                         {meaning.synonyms && meaning.synonyms.length > 0 && (
                           <div className="flex gap-10">
-                            <h4 className="font-normal text-base leading-4 text-dark-mode-example mb-4">
+                            <h4 className="font-normal text-base md:text-[18px] leading-4 text-dark-mode-example mb-4">
                               Synonym
                             </h4>
-                            <li className="font-semibold text-base leading-tight text-purple-600 list-none cursor-pointer">
+                            <li className="font-semibold text-base md:text-[18px] leading-tight text-purple-600 list-none cursor-pointer">
                               {meaning.synonyms.join(", ")}
                             </li>
                           </div>
@@ -212,10 +216,10 @@ function App() {
 
                         {meaning.antonyms && meaning.antonyms.length > 0 && (
                           <div className="flex gap-10">
-                            <h4 className="font-normal text-base leading-4 text-dark-mode-example">
+                            <h4 className="font-normal  md:text-[18px] text-base leading-4 text-dark-mode-example">
                               Antonyms
                             </h4>
-                            <li className="font-semibold text-base leading-tight text-purple-600 list-none cursor-pointer">
+                            <li className="font-semibold text-base md:text-[18px] leading-tight text-purple-600 list-none cursor-pointer">
                               {meaning.antonyms.join(", ")}
                             </li>
                           </div>
@@ -229,7 +233,7 @@ function App() {
                           : "border-[#E9E9E9]"
                       }`}
                     ></div>
-                    <h4 className="font-normal text-base leading-4  text-dark-mode-example underline mb-[10px]">
+                    <h4 className="font-normal text-base md:text-[18px] leading-4  text-dark-mode-example underline mb-[10px]">
                       Source
                     </h4>
                     <div className="w-full">
@@ -248,7 +252,9 @@ function App() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {entry.sourceUrls[0]}
+                        {entry.sourceUrls[0].length > 35
+                          ? "https://en.wiktionary.org/wiki/"
+                          : entry.sourceUrls[0]}
                         <img src="./images/icon-new-window.svg" alt="icon" />
                       </a>
                     </div>
