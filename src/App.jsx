@@ -83,7 +83,7 @@ function App() {
             className={` w-full rounded-2xl text-base font-bold fill-none block p-3 outline-purple-600 cursor-pointer absolute ${
               mode === "dark" ? " bg-[#1F1F1F]" : "bg-[#F4F4F4]"
             } ${mode === "dark" ? "text-dark-mode-font" : " text-gray-900"} 
-            ${isEmptyError ? "border border-red-500" : ""}`}
+            ${isEmptyError ? "border border-solid border-red-500" : ""}`}
           />
           <img
             className="absolute right-[15px] top-[15px]"
@@ -110,9 +110,9 @@ function App() {
               {data && data.length > 0 ? <div>{data[0].phonetic}</div> : null}
             </div>
           </div>
-          <div className="h-8 w-8">
+          <div className=" w-8">
             {data && data.length > 0 && (
-              <div>
+              <div className="flex flex-col gap-2 ">
                 {data[0].phonetics.map((phonetic, index) => (
                   <div key={index}>
                     {phonetic.audio && (
