@@ -20,15 +20,33 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
               ...provided,
               color: mode === "dark" ? "#A445ED" : "#A445ED",
             }),
+            placeholder: (provided, state) => ({
+              ...provided,
+              color: mode === "dark" ? "#ffffff" : "#2D2D2D",
+              fontWeight: "700",
+            }),
             valueContainer: (provided, state) => ({
               ...provided,
               backgroundColor: mode === "dark" ? "#050505" : "",
+            }),
+            control: (provided, state) => ({
+              ...provided,
               border: "none",
+              backgroundColor: "none",
+              border: state.isFocused ? 0 : 0,
+              boxShadow: state.isFocused ? 0 : 0,
+              "&:hover": {
+                border: state.isFocused ? 0 : 0,
+              },
             }),
             option: (provided, state) => ({
               ...provided,
               cursor: "pointer",
+              fontWeight: "700",
               backgroundColor: mode === "dark" ? "#1F1F1F" : "",
+              "&:hover": {
+                color: "#A445ED",
+              },
             }),
             indicatorsContainer: (provided, state) => ({
               ...provided,
@@ -47,7 +65,10 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
               width: "160px",
               borderRadius: "16px",
               backgroundColor: mode === "dark" ? "#1F1F1F" : "#FFFFFF",
-              boxShadow: mode === "dark" ? "0px 5px 30px #A445ED" : "",
+              boxShadow:
+                mode === "dark"
+                  ? "0px 5px 30px #A445ED"
+                  : "0px 5px 30px rgba(0, 0, 0, 0.1)",
               marginTop: "15px",
             }),
             menuList: (provided, state) => ({

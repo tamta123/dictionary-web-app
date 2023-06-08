@@ -82,7 +82,8 @@ function App() {
             placeholder="Search for any word…"
             className={` w-full rounded-2xl text-base font-bold fill-none block p-3 outline-purple-600 cursor-pointer absolute ${
               mode === "dark" ? " bg-[#1F1F1F]" : "bg-[#F4F4F4]"
-            } ${mode === "dark" ? "text-dark-mode-font" : " text-gray-900"}`}
+            } ${mode === "dark" ? "text-dark-mode-font" : " text-gray-900"} 
+            ${isEmptyError ? "border border-red-500" : ""}`}
           />
           <img
             className="absolute right-[15px] top-[15px]"
@@ -109,7 +110,7 @@ function App() {
               {data && data.length > 0 ? <div>{data[0].phonetic}</div> : null}
             </div>
           </div>
-          <div className="h-12 w-12">
+          <div className="h-8 w-8">
             {data && data.length > 0 && (
               <div>
                 {data[0].phonetics.map((phonetic, index) => (
@@ -136,7 +137,8 @@ function App() {
           </div>
         </div>
         {searchPerformed && (data === null || data.length === 0) ? (
-          <div className={`text-center mt-8 `}>
+          <div className={`flex flex-col justify-center items-center `}>
+            <img className="mb-[40px]" src="./images/ups.png" alt="emoji" />
             <p
               className={`font-bold text-xl leading-6 mb-6 ${
                 mode === "dark" ? "text-dark-mode-font" : " text-[#2D2D2D]"
@@ -144,7 +146,7 @@ function App() {
             >
               No Definitions Found
             </p>
-            <span className="text-[#757575]">
+            <span className="text-[#757575] text-center">
               Sorry pal, we couldn't find definitions for the word you were
               looking for. You can try the search again at later time or head to
               the web instead.
