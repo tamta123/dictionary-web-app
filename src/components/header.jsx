@@ -20,14 +20,17 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
               ...provided,
               color: mode === "dark" ? "#A445ED" : "#A445ED",
             }),
-            placeholder: (provided, state) => ({
+            placeholder: (provided) => ({
               ...provided,
               color: mode === "dark" ? "#ffffff" : "#2D2D2D",
               fontWeight: "700",
+              margin: "0px",
             }),
-            valueContainer: (provided, state) => ({
+            valueContainer: (provided) => ({
               ...provided,
               backgroundColor: mode === "dark" ? "#050505" : "",
+              padding: "0px",
+              width: "85px",
             }),
             control: (provided, state) => ({
               ...provided,
@@ -39,28 +42,30 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
                 border: state.isFocused ? 0 : 0,
               },
             }),
-            option: (provided, state) => ({
+            option: (provided) => ({
               ...provided,
               cursor: "pointer",
               fontWeight: "700",
+              fontSize: "14px",
               backgroundColor: mode === "dark" ? "#1F1F1F" : "",
               "&:hover": {
                 color: "#A445ED",
               },
             }),
-            indicatorsContainer: (provided, state) => ({
+            indicatorsContainer: (provided) => ({
               ...provided,
               backgroundColor: mode === "dark" ? "#050505" : "",
+              padding: "0px",
             }),
-            indicatorSeparator: (provided, state) => ({
+            indicatorSeparator: (provided) => ({
               ...provided,
               display: "none",
             }),
-            group: (provided, state) => ({
+            group: (provided) => ({
               ...provided,
               color: mode === "dark" ? "#A445ED" : "#A445ED",
             }),
-            menu: (provided, state) => ({
+            menu: (provided) => ({
               ...provided,
               width: "160px",
               borderRadius: "16px",
@@ -71,10 +76,17 @@ const Header = ({ mode, toggleMode, selectedFont, handleFontChange }) => {
                   : "0px 5px 30px rgba(0, 0, 0, 0.1)",
               marginTop: "15px",
             }),
-            menuList: (provided, state) => ({
+            menuList: (provided) => ({
               ...provided,
               color: mode === "dark" ? "#ffffff" : "",
               fontWeight: "normal",
+            }),
+            input: (provided) => ({
+              ...provided,
+              width: "110px",
+              textAlign: "right",
+              padding: "0px",
+              margin: "0px",
             }),
           }}
         />

@@ -97,7 +97,7 @@ function App() {
             Whoops, can't be empty...
           </div>
         ) : null}
-        <div className="mt-[80px] flex justify-between items-center gap-y-2">
+        <div className="mt-[80px] flex justify-between items-center">
           <div>
             <div
               className={`font-bold text-2xl leading-8 mb-2 md:text-6xl ${
@@ -122,9 +122,9 @@ function App() {
                         height="75"
                         viewBox="0 0 75 75"
                         onClick={() => callWord(phonetic.audio)}
-                        className="hover:audio-hover"
+                        className="hover:audio-hover w-9 h-9 md:w-14 md:h-14"
                       >
-                        <g fill="#A445ED" fill-rule="evenodd">
+                        <g fill="#A445ED" filRule="evenodd">
                           <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" />
                           <path d="M29 27v21l21-10.5z" />
                         </g>
